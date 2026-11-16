@@ -1,27 +1,41 @@
-# Pacman Agent
+This is my bot for the pacman competition.
 
-A template for coding a pacman agent.
+Implemented features:
 
-## Setting up the environment
-1. Copy the code from this framework to create your Pacman Agent.
-2. Clone your own pacman-agent repository (e.g., `git clone git@github.com:Username/pacman-agent.git`)
-3. Go into pacman-agent folder, `cd pacman-agent/`
-4. Run `git submodule update --init --remote` to pull the last pacman-contest
-5. Create a virtual environment (e.g., `python3.8 -m venv venv`)
-6. Activate the virtual environment with `source venv/bin/activate`
-7. Go to the pacman-contest folder and install the requirements:
-    - `cd pacman-contest/`
-    - `pip install -r requirements.txt`
-    - `pip install -e .`
+ATTACKER:
+    Goes for the nearest food.
 
-## Coding a new agent
-In the root folder do the following:
-1. Create in `my_team.py` a class with the name of your agent that inherits from `CaptureAgent`, e.g. `class ReflexCaptureAgent(CaptureAgent):`
-2. In the new class, override the `def choose_action(self, game_state):` function to return the best next action (check the given source code example).
-3. (Optional) Add any other functions to the class for reasoning / learning and improving your agents decision which could also use other code sources in the same folder.
+    Treats visible enemy ghosts as dangerous unless they're scared.
 
-To debug the agent you can run `capture.py` between the `baseline_team` and your current agent:
-1. `cd pacman-contest/src/contest/`
-2. `python capture.py -r baseline_team -b ../../../my_team.py`
+    Heads home to bank food under certain conditions.
+
+    While running home from a ghost, it goes to a capsule if one is closer than home.
+
+    If a ghost is close and it's carrying nothing, it goes for a capsule.
+
+    If every path is blocked, it runs away from the ghosts.
+
+DEFENDER:
+    Guards a border square chosen at game start: the one closest overall to the food it defends.
+
+    Notices when your food disappears and goes there.
+
+    Chases the nearest visible invader.
+
+    When it's scared, it runs away from attacker.
 
 
+TO DO: 
+    Strategy rather than greedy.
+
+    Dead ends.
+
+    Attacker chasing ghsots when they are scared.
+
+    Dynamic roles rather than only attack/defense.
+
+    Eat more food and far away, when they are scared.
+
+    Use noisy distance readings also.
+
+    Tune some settings.
